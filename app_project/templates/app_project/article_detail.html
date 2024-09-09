@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ article.title }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+{% extends 'home.html' %}
+{% block content %}
     <div class="container mt-4">
         <h1>{{ article.title }}</h1>
         <p><strong>Autores:</strong> {{ article.authors }}</p>
@@ -17,9 +12,6 @@
         <a href="{% url 'article_update' pk=article.pk %}" class="btn btn-primary">Editar</a>
         <a href="{% url 'article_delete' pk=article.pk %}" class="btn btn-danger">Excluir</a>
         <a href="{% url 'article_list' %}" class="btn btn-secondary">Voltar</a>
-
-
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}
+
