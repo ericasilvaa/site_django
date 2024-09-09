@@ -1,13 +1,16 @@
  
-from django.urls import path
+from django.urls import path, include
 from app_project import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+
 urlpatterns = [
     # rota, view reponsavel , nome referencia 
     #exe: usuario.com 
     #path('',views.home, name='home'),
-    
+
+    path('admin/', admin.site.urls),
     path('', views.article_list, name='article_list'), #Página inicial com a lista de artigos
     path('article/<int:pk>/', views.article_detail, name='article_detail'), # Detalhes de um artigo específico
     path('article/new/', views.article_create, name='article_create'), # Pg para criar um novo artigo
