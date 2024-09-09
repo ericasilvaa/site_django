@@ -28,7 +28,7 @@ class Article(models.Model):
         MaxValueValidator(datetime.datetime.now().year)
     ])
     journal = models.CharField(max_length=200)
-    pdf_file = models.FileField(upload_to='pdfs/', validators=[
+    pdf_file = models.FileField(upload_to='http://127.0.0.1:8000/article/7/', validators=[
         FileExtensionValidator(allowed_extensions=['pdf'])])
 
     

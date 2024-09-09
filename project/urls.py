@@ -1,7 +1,8 @@
  
 from django.urls import path
 from app_project import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     # rota, view reponsavel , nome referencia 
     #exe: usuario.com 
@@ -14,5 +15,4 @@ urlpatterns = [
     path('article/<int:pk>/delete/', views.article_delete, name='article_delete'),# Pg para confirmar a exclusão 
     path('search/', views.search_view, name='search'),
 
-]
- 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
