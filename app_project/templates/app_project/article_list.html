@@ -1,54 +1,50 @@
 {% extends 'home.html' %}
 {% block content %}
-<div class="container-fluid mt-5">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-            <a href="{% url 'article_create' %}" class="btn btn-primary mb-4 w-100">Adicionar um Artigo</a>
+            <!-- Botão de Adicionar Artigo (compacto) -->
+            <a href="{% url 'article_create' %}" class="btn btn-primary mb-3 btn-sm w-100">Adicionar um Artigo</a>
 
-        <div class="mb-4">
-            <form method="get">
-                <label for="sort">Ordenar por: </label>
-                <select id="sort" name="sort" class="form-select" onchange="this.form.submit()">
-                    <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Título</option>
-                    <option value="date" {% if sort_by == 'date' %}selected{% endif %}>Data</option>
-                    <option value="authors" {% if sort_by == 'authors' %}selected{% endif %}>Autores</option>
-                </select>
-            </form>
-        </div>
+            <!-- Formulário de Ordenação (compacto) -->
+            <div class="mb-3">
+                <form method="get">
+                    <label for="sort" class="form-label">Ordenar por:</label>
+                    <select id="sort" name="sort" class="form-select form-select-sm" onchange="this.form.submit()">
+                        <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Título</option>
+                        <option value="date" {% if sort_by == 'date' %}selected{% endif %}>Data</option>
+                        <option value="authors" {% if sort_by == 'authors' %}selected{% endif %}>Autores</option>
+                    </select>
+                </form>
+            </div>
 
+            <!-- Listagem de Artigos (compacto) -->
             {% if articles %}
-            <div>
+            <div class="article-list">
                 {% for article in articles|slice:":10" %}
-                <div class="col">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-right">
-                            <h5 class="card-title">
-                                <p class="text-center">
-                                    <a href="{% url 'article_detail' pk=article.pk %}">{{ article.title }}</a>
-                                </p>
-                            </h5>
-                            <p class="card-text text-muted">
-                                <strong>Autor(es):</strong> {{ article.authors }}<br>
-                                <strong>Palavras-chave:</strong> {{ article.keywords }}<br>
-                                <strong>Resumo:</strong> {{ article.abstract|truncatewords:20 }} <!-- Limita o resumo a 20 palavras -->
-                            </p>
-                        </div>
+                <div class="card mb-2">
+                    <div class="card-body p-2"> <!-- Reduzido padding -->
+                        <h6 class="card-title text-center mb-2">
+                            <a href="{% url 'article_detail' pk=article.pk %}" class="text-decoration-none">{{ article.title }}</a>
+                        </h6>
+                        <p class="card-text text-muted" style="font-size: 0.85rem;"> <!-- Fonte menor -->
+                            <strong>Autor(es):</strong> {{ article.authors }}<br>
+                            <strong>Palavras-chave:</strong> {{ article.keywords }}<br>
+                            <strong>Resumo:</strong> {{ article.abstract|truncatewords:15 }} <!-- Limita o resumo a 15 palavras para compactar -->
+                        </p>
                     </div>
-                </div>
-                {% empty %}
-                <div class="col">
-                    <div class="alert alert-info text-center" role="alert">Nenhum artigo encontrado.</div>
                 </div>
                 {% endfor %}
             </div>
 
-            <!-- Botão "Ver mais" -->
+            <!-- Botão "Ver mais" (compacto) -->
             {% if articles|length > 10 %}
-            <div class="d-flex justify-content-center mt-4">
-                <a href="{% url 'article_list_all' %}" class="btn btn-secondary">Ver todos os artigos</a>
+            <div class="d-flex justify-content-center mt-3">
+                <a href="{% url 'article_list_all' %}" class="btn btn-secondary btn-sm">Ver todos os artigos</a>
             </div>
             {% endif %}
             {% else %}
+            <!-- Mensagem de Nenhum Artigo Encontrado -->
             <div class="alert alert-info text-center" role="alert">Nenhum artigo encontrado.</div>
             {% endif %}
         </div>

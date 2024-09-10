@@ -7,53 +7,53 @@
 
                 <form method="post" enctype="multipart/form-data" id="articleForm">
                     {% csrf_token %}
-                    
+
                     <!-- Campo Título -->
                     <div class="mb-3">
                         <label for="id_title" class="form-label">Título</label>
-                        <input type="text" class="form-control" id="id_title" name="title" placeholder="Título do artigo" required>
+                        <input type="text" class="form-control" id="id_title" name="title" value="{{ form.instance.title }}" placeholder="Título do artigo" required>
                         <div class="invalid-feedback">O título deve ter no mínimo 10 caracteres.</div>
                     </div>
 
                     <!-- Campo Autores -->
                     <div class="mb-3">
                         <label for="id_authors" class="form-label">Autores</label>
-                        <input type="text" class="form-control" id="id_authors" name="authors" placeholder="Nome dos autores" required>
+                        <input type="text" class="form-control" id="id_authors" name="authors" value="{{ form.instance.authors }}" placeholder="Nome dos autores" required>
                         <div class="invalid-feedback">Formato inválido. Use "Sobrenome, Nome; Sobrenome, Nome".</div>
                     </div>
 
                     <!-- Campo Resumo -->
                     <div class="mb-3">
                         <label for="id_abstract" class="form-label">Resumo</label>
-                        <textarea class="form-control" id="id_abstract" name="abstract" rows="3" placeholder="Resumo do artigo" required></textarea>
+                        <textarea class="form-control" id="id_abstract" name="abstract" rows="3" placeholder="Resumo do artigo" required>{{ form.instance.abstract }}</textarea>
                         <div class="invalid-feedback">O resumo deve ter entre 100 e 1500 caracteres.</div>
                     </div>
 
                     <!-- Campo Palavras-chave -->
                     <div class="mb-3">
                         <label for="id_keywords" class="form-label">Palavras-chave</label>
-                        <input type="text" class="form-control" id="id_keywords" name="keywords" placeholder="Ex: 'Sistemas de recuperação. Linguagem natural.'" required>
+                        <input type="text" class="form-control" id="id_keywords" name="keywords" value="{{ form.instance.keywords }}" placeholder="Ex: 'Sistemas de recuperação. Linguagem natural.'" required>
                         <div class="invalid-feedback">As frases devem ser separadas por ponto e espaço, e terminar com ponto final.</div>
                     </div>
 
                     <!-- Campo Data -->
                     <div class="mb-3">
                         <label for="id_date" class="form-label">Data</label>
-                        <input type="text" class="form-control" id="id_date" name="date" placeholder="Ano (ex: 2000)" required>
+                        <input type="text" class="form-control" id="id_date" name="date" value="{{ form.instance.date }}" placeholder="Ano (ex: 2000)" required>
                         <div class="invalid-feedback">A data deve estar entre 1900 e o ano atual.</div>
                     </div>
 
                     <!-- Campo Jornal -->
                     <div class="mb-3">
                         <label for="id_journal" class="form-label">Jornal</label>
-                        <input type="text" class="form-control" id="id_journal" name="journal" placeholder="Nome da revista ou jornal" required>
+                        <input type="text" class="form-control" id="id_journal" name="journal" value="{{ form.instance.journal }}" placeholder="Nome da revista ou jornal" required>
                         <div class="invalid-feedback">Este campo é obrigatório.</div>
                     </div>
 
                     <!-- Campo Arquivo PDF -->
                     <div class="mb-3">
                         <label for="id_pdf_file" class="form-label">Arquivo PDF</label>
-                        <input type="file" class="form-control" id="id_pdf_file" name="pdf_file" accept="application/pdf" required>
+                        <input type="file" class="form-control" id="id_pdf_file" name="pdf_file" accept="application/pdf">
                         <div class="invalid-feedback">Por favor, envie um arquivo PDF válido.</div>
                     </div>
 
@@ -162,4 +162,5 @@
             });
         });
     </script>
+
 {% endblock %}

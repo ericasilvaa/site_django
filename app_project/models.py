@@ -31,6 +31,19 @@ class Article(models.Model):
     pdf_file = models.FileField(upload_to='http://127.0.0.1:8000/article/7/', validators=[
         FileExtensionValidator(allowed_extensions=['pdf'])])
 
-    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.title
+
+class ArticleHistory(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='history')
+    title = models.CharField(max_length=200)
+    authors = models.CharField(max_length=500)
+    abstract = models.TextField()
+    keywords = models.CharField(max_length=400)
+    updated_at = models.DateTimeField(auto_now_add=True)  # Quando essa versão foi criada
+
+    def __str__(self):
+        return f"Versão de {self.updated_at.strftime('%d/%m/%Y %H:%M')} do artigo '{self.article.title}'"
