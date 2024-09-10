@@ -69,3 +69,18 @@ def search_view(request):
         results = Article.objects.none()
 
     return render(request, 'app_project/search_results.html', {'results': results, 'query': query})
+
+
+def article_list(request):
+    sort_by = request.GET.get('sort', 'title')  # Ordena por título como padrão
+
+    if sort_by == 'title':
+        articles = Article.objects.all().order_by('title')
+    elif sort_by == 'date':
+        articles = Article.objects.all().order_by('-date')
+    elif sort_by == 'authors':
+        articles = Article.objects.all().order_by('authors')
+    else:
+        articles = Article.objects.all()  # Ordem padrão caso nada seja selecionado
+
+    return render(request, 'app_project/article_list.html', {'articles': articles, 'sort_by': sort_by})
