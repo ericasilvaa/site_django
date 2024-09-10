@@ -15,9 +15,9 @@ class Article(models.Model):
 ])
     abstract = models.TextField(validators=[
         MinLengthValidator(100),
-        MaxLengthValidator(1000)
+        MaxLengthValidator(1500)
     ])
-    keywords = models.CharField(max_length=255, validators=[
+    keywords = models.CharField(max_length=400, validators=[
     RegexValidator(
         regex=r'^[A-Za-zÀ-ÖØ-öø-ÿ,\s]+$',
         message='As palavras-chave devem ser separadas por vírgulas.'
