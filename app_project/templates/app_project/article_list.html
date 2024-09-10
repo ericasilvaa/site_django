@@ -1,15 +1,56 @@
 {% extends 'home.html' %}
 {% block content %}
- <div class="container mt-4">
-        <a href="{% url 'article_create' %}" class="btn btn-primary mb-3">Adicionar um Artigo</a>
-        <ul class="list-group">
-            {% for article in articles %}
-                <li class="list-group-item">
-                    <a href="{% url 'article_detail' pk=article.pk %}">{{ article.title }}</a>
-                </li>
-            {% empty %}
-                <li class="list-group-item">Nenhum artigo encontrado.</li>
-            {% endfor %}
-        </ul>
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <a href="{% url 'article_create' %}" class="btn btn-primary mb-4 w-100">Adicionar um Artigo</a>
+
+            {% if articles %}
+            <div >
+                {% for article in articles|slice:":10" %}
+                <div class="col">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-right">
+                            <h5 class="card-title">
+                                <p class=" text-center"><a href="{% url 'article_detail' pk=article.pk %}">{{ article.title }}</a></p>
+                            </h5>
+                            <p class="card-text text-muted">
+                                <strong>Palavras-chave:</strong> {{ article.keywords }}<br>
+                                <strong>Resumo:</strong> {{ article.abstract|truncatewords:20 }} <!-- Limita o resumo a 20 palavras -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col">
+                    <div class="alert alert-info text-center" role="alert">Nenhum artigo encontrado.</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Se houver mais de 10 artigos, exibe um botão "Ver mais" -->
+            {% if articles|length > 10 %}
+            <div class="d-flex justify-content-center mt-4">
+                <a href="{% url 'article_list_all' %}" class="btn btn-secondary">Ver todos os artigos</a>
+            </div>
+            {% endif %}
+            {% else %}
+            <div class="alert alert-info text-center" role="alert">Nenhum artigo encontrado.</div>
+            {% endif %}
+        </div>
     </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="bg-dark text-light py-3 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2024 Seu Site de Artigos. Todos os direitos reservados.</p>
+        <p>
+            <a href="#" class="text-light">Política de Privacidade</a> |
+            <a href="#" class="text-light">Termos de Uso</a> |
+            <a href="#" class="text-light">Contato</a>
+        </p>
+    </div>
+</footer>
 {% endblock %}

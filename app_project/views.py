@@ -7,7 +7,7 @@ from django.template import TemplateDoesNotExist
 from .models import Article
 from .forms import ArticleForm
 from django.contrib import messages
-
+from django.db.models import Q
 def article_list(request):
     articles = Article.objects.all()
     return render(request, 'app_project/article_list.html', {'articles': articles})
@@ -57,5 +57,15 @@ def article_delete(request, pk):
     return render(request, 'app_project/article_delete.html', {'article': article})
 
 def search_view(request):
-    # Lógica de busca
-    return render(request, 'app_project/search_results.html')
+    query = request.GET.get('q')
+    if query:
+        # Busca pelo título, autores ou palavras-chave
+        results = Article.objects.filter(
+            Q(title__icontains=query) |
+            Q(authors__icontains=query) |
+            Q(keywords__icontains=query)
+        )
+    else:
+        results = Article.objects.none()
+
+    return render(request, 'app_project/search_results.html', {'results': results, 'query': query})
