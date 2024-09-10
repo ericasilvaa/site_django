@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template import TemplateDoesNotExist
 from .models import Article
 from .forms import ArticleForm
+from django.contrib import messages
 
 def article_list(request):
     articles = Article.objects.all()
@@ -20,10 +21,15 @@ def article_create(request):
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Artigo cadastrado com sucesso!')  # Mensagem de sucesso
             return redirect('article_list')
+        else:
+            messages.error(request, 'Erro ao cadastrar o artigo. Verifique os dados informados.')  # Mensagem de erro
     else:
         form = ArticleForm()
+
     return render(request, 'app_project/article_form.html', {'form': form})
+
 
 def article_update(request, pk):
     article = get_object_or_404(Article, pk=pk)
@@ -31,24 +37,24 @@ def article_update(request, pk):
         form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             form.save()
-            return redirect('article_detail', pk=article.pk)  # Redireciona para a página de detalhes do artigo
+            messages.success(request, 'Artigo atualizado com sucesso!')  # Mensagem de sucesso na atualização
+            return redirect('article_detail', pk=article.pk)
+        else:
+            messages.error(request, 'Erro ao atualizar o artigo. Verifique os dados informados.')  # Mensagem de erro
     else:
         form = ArticleForm(instance=article)
+
     return render(request, 'app_project/article_form.html', {'form': form})
+
 
 def article_delete(request, pk):
     article = get_object_or_404(Article, pk=pk)
-
-    
-
-
     if request.method == "POST":
         article.delete()
-        return redirect('article_list')  # Redireciona para a lista de artigos após exclusão
-    
+        messages.success(request, 'Artigo excluído com sucesso!')  # Mensagem de sucesso na exclusão
+        return redirect('article_list')
 
     return render(request, 'app_project/article_delete.html', {'article': article})
-
 
 def search_view(request):
     # Lógica de busca

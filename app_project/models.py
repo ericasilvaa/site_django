@@ -7,22 +7,22 @@ import datetime
 
 class Article(models.Model):
     title = models.CharField(max_length=200, validators=[MinLengthValidator(10)])
-    authors = models.CharField(max_length=500,  validators=[
-    RegexValidator(
-        regex=r'^[A-Za-zÀ-ÖØ-öø-ÿ,;\s]+$',
-        message='Use um formato válido: "Sobrenome, Nome; Sobrenome, Nome".'
-    )
-])
+    authors = models.CharField(max_length=500 #,  validators=[
+    #RegexValidator(
+    #    regex=r'^[A-Za-zÀ-ÖØ-öø-ÿ,;\s]+$',
+    #    message='Use um formato válido: "Sobrenome, Nome; Sobrenome, Nome".'
+    #)
+)
     abstract = models.TextField(validators=[
         MinLengthValidator(100),
         MaxLengthValidator(1500)
     ])
     keywords = models.CharField(max_length=400, validators=[
-    RegexValidator(
-        regex=r'^[A-Za-zÀ-ÖØ-öø-ÿ,\s]+$',
-        message='As palavras-chave devem ser separadas por vírgulas.'
-    )
-])
+        RegexValidator(
+            regex=r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+(\.\s*[A-Za-zÀ-ÖØ-öø-ÿ\s]+)*\.$',
+            message='As palavras-chave devem ser frases separadas por ponto e espaço (ex: "Frase 1. Frase 2.").'
+        )
+    ])
     date = models.IntegerField(validators=[
         MinValueValidator(1900),
         MaxValueValidator(datetime.datetime.now().year)
