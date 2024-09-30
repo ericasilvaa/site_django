@@ -27,17 +27,17 @@ schema_view = get_schema_view(
 # Definindo todas as rotas no mesmo urlpatterns
 urlpatterns = [
     # Rotas principais do site
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),  # Rota para o painel administrativo do Django
     path('', views.article_list, name='article_list'),  # Página inicial com a lista de artigos
     path('article/<int:pk>/', views.article_detail, name='article_detail'),  # Detalhes de um artigo específico
     path('article/new/', views.article_create, name='article_create'),  # Página para criar um novo artigo
     path('article/<int:pk>/edit/', views.article_update, name='article_update'),  # Página para editar um artigo
     path('article/<int:pk>/delete/', views.article_delete, name='article_delete'),  # Página para confirmar a exclusão
-    path('search/', views.search_view, name='search'),
-
+    path('search/', views.search_view, name='search'),  # Rota para a busca de artigos
+    
     # Rotas da API JWT
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Rota para obtenção do token
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Rota para refresh do token
 
     # Rotas para os artigos da API
     path('api/artigos/', views.ArticleListCreateView.as_view(), name='article_list_create'),  # CRUD Artigos
@@ -45,4 +45,4 @@ urlpatterns = [
 
     # Documentação da API Swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Configurações para servir arquivos de mídia

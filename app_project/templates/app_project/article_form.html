@@ -2,10 +2,10 @@
 {% block content %}
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <h1 class="text-center mb-4">{{ form.instance.pk|yesno:"Editar Artigo,Novo Artigo" }}</h1>
 
-                <form method="post" enctype="multipart/form-data" id="articleForm">
+                <form method="post" enctype="multipart/form-data" id="articleForm" class="border p-4 rounded shadow">
                     {% csrf_token %}
 
                     <!-- Campo Título -->
@@ -62,17 +62,18 @@
 
                     <!-- Mensagens do Django -->
                     {% if messages %}
-                        <ul class="messages">
-                            {% for message in messages %}
-                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
+                        <div class="alert alert-info mt-3">
+                            <ul class="list-unstyled mb-0">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% endif %}
 
                 </form>
             </div>
         </div>
-    <br><br><br><br><br><br>
     </div>
 
     <!-- Validação dinâmica com JavaScript -->
@@ -80,7 +81,6 @@
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.getElementById('articleForm');
 
-            // Adiciona o listener para o submit
             form.addEventListener('submit', function(event) {
                 if (!form.checkValidity()) {
                     event.preventDefault();
@@ -89,6 +89,7 @@
                 form.classList.add('was-validated');
             });
 
+            // Funções de validação (sem alterações)
             // Verificação de título
             const titleInput = document.getElementById('id_title');
             titleInput.addEventListener('input', function() {
@@ -100,7 +101,7 @@
                 }
             });
 
-            // Verificação de autores (exemplo de regex simples)
+            // Verificação de autores
             const authorsInput = document.getElementById('id_authors');
             const authorsRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ,;\s]+$/;
             authorsInput.addEventListener('input', function() {
@@ -124,7 +125,7 @@
                 }
             });
 
-            // Verificação de palavras-chave (regex para separação por vírgulas)
+            // Verificação de palavras-chave
             const keywordsInput = document.getElementById('id_keywords');
             const keywordsRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+(\.\s*[A-Za-zÀ-ÖØ-öø-ÿ\s]+)*\.$/;
             keywordsInput.addEventListener('input', function() {
@@ -136,7 +137,7 @@
                 }
             });
 
-            // Verificação de data (entre 1900 e o ano atual)
+            // Verificação de data
             const dateInput = document.getElementById('id_date');
             const currentYear = new Date().getFullYear();
             dateInput.addEventListener('input', function() {
