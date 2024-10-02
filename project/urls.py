@@ -1,32 +1,9 @@
-<<<<<<< HEAD
- 
-=======
->>>>>>> parte2/main
 from django.urls import path, include
 from app_project import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 
-<<<<<<< HEAD
-urlpatterns = [
-    # rota, view reponsavel , nome referencia 
-    #exe: usuario.com 
-    #path('',views.home, name='home'),
-
-    path('admin/', admin.site.urls),
-    path('', views.article_list, name='article_list'), #Página inicial com a lista de artigos
-    path('article/<int:pk>/', views.article_detail, name='article_detail'), # Detalhes de um artigo específico
-    path('article/new/', views.article_create, name='article_create'), # Pg para criar um novo artigo
-    path('article/<int:pk>/edit/', views.article_update, name='article_update'), # Pg para editar 
-    path('article/<int:pk>/delete/', views.article_delete, name='article_delete'),# Pg para confirmar a exclusão 
-    path('search/', views.search_view, name='search'),
-
-    
-    path('api/', include('api.urls')),  # rotas da API
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-=======
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -52,7 +29,7 @@ urlpatterns = [
     # Rotas principais do site
     path('admin/', admin.site.urls),  # Rota para o painel administrativo do Django
     path('', views.article_list, name='article_list'),  # Página inicial com a lista de artigos
-    path('article/<int:pk>/', views.article_detail, name='article_detail'),  # Detalhes de um artigo específico
+    path('article/<int:pk>/', views.article_detail, name='article_detail_site'),  # Detalhes de um artigo específico
     path('article/new/', views.article_create, name='article_create'),  # Página para criar um novo artigo
     path('article/<int:pk>/edit/', views.article_update, name='article_update'),  # Página para editar um artigo
     path('article/<int:pk>/delete/', views.article_delete, name='article_delete'),  # Página para confirmar a exclusão
@@ -69,4 +46,3 @@ urlpatterns = [
     # Documentação da API Swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Configurações para servir arquivos de mídia
->>>>>>> parte2/main
