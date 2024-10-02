@@ -31,6 +31,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_project',
 
+    
+    'rest_framework',
+    'corsheaders',
+    'api', 
+    'rest_framework.authtoken',  # Autenticação via token
+
 ]
 
 MIDDLEWARE = [
@@ -41,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -76,7 +83,7 @@ DATABASES = {
         #'NAME': str(BASE_DIR / 'db.sqlite3'),
         'NAME': 'djangoprojeto',
         'USER': 'artigos',
-        'PASSWORD': 'sistemas',
+        'PASSWORD': 'django',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -123,3 +130,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_ORIGINS = [
+    'http://localhost:8080',
+]
+
+

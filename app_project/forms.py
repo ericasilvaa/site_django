@@ -20,6 +20,3 @@ class ArticleForm(forms.ModelForm):
             'journal': 'Jornal',
             'pdf_file': 'Arquivo PDF',
         }
-
-   
- 

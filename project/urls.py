@@ -18,4 +18,7 @@ urlpatterns = [
     path('article/<int:pk>/delete/', views.article_delete, name='article_delete'),# Pg para confirmar a exclusão 
     path('search/', views.search_view, name='search'),
 
+    
+    path('api/', include('api.urls')),  # rotas da API
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
