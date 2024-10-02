@@ -19,4 +19,11 @@ class ArticleForm(forms.ModelForm):
             'date': 'Data',
             'journal': 'Jornal',
             'pdf_file': 'Arquivo PDF',
+<<<<<<< HEAD
         }
+=======
+        }
+
+   
+ 
+>>>>>>> parte2/main

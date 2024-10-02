@@ -2,10 +2,17 @@
 {% block content %}
     <div class="container mt-5">
         <div class="row justify-content-center">
+<<<<<<< HEAD
             <div class="col-md-6">
                 <h1 class="text-center mb-4">{{ form.instance.pk|yesno:"Editar Artigo,Novo Artigo" }}</h1>
 
                 <form method="post" enctype="multipart/form-data" id="articleForm">
+=======
+            <div class="col-md-8">
+                <h1 class="text-center mb-4">{{ form.instance.pk|yesno:"Editar Artigo,Novo Artigo" }}</h1>
+
+                <form method="post" enctype="multipart/form-data" id="articleForm" class="border p-4 rounded shadow">
+>>>>>>> parte2/main
                     {% csrf_token %}
 
                     <!-- Campo Título -->
@@ -60,6 +67,7 @@
                     <!-- Botão de Salvar -->
                     <button type="submit" class="btn btn-primary w-100">Salvar</button>
 
+<<<<<<< HEAD
                     <!-- Botão de Voltar -->
                     <a href="{% url 'article_list' %}" class="btn btn-secondary w-100 mt-3">Voltar</a>
 
@@ -71,12 +79,26 @@
                                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                             {% endfor %}
                         </ul>
+=======
+                    <!-- Mensagens do Django -->
+                    {% if messages %}
+                        <div class="alert alert-info mt-3">
+                            <ul class="list-unstyled mb-0">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+>>>>>>> parte2/main
                     {% endif %}
 
                 </form>
             </div>
         </div>
+<<<<<<< HEAD
     <br><br><br><br><br><br>
+=======
+>>>>>>> parte2/main
     </div>
 
     <!-- Validação dinâmica com JavaScript -->
@@ -84,7 +106,10 @@
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.getElementById('articleForm');
 
+<<<<<<< HEAD
             // Adiciona o listener para o submit
+=======
+>>>>>>> parte2/main
             form.addEventListener('submit', function(event) {
                 if (!form.checkValidity()) {
                     event.preventDefault();
@@ -93,6 +118,10 @@
                 form.classList.add('was-validated');
             });
 
+<<<<<<< HEAD
+=======
+            // Funções de validação (sem alterações)
+>>>>>>> parte2/main
             // Verificação de título
             const titleInput = document.getElementById('id_title');
             titleInput.addEventListener('input', function() {
@@ -104,7 +133,11 @@
                 }
             });
 
+<<<<<<< HEAD
             // Verificação de autores (exemplo de regex simples)
+=======
+            // Verificação de autores
+>>>>>>> parte2/main
             const authorsInput = document.getElementById('id_authors');
             const authorsRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ,;\s]+$/;
             authorsInput.addEventListener('input', function() {
@@ -128,7 +161,11 @@
                 }
             });
 
+<<<<<<< HEAD
             // Verificação de palavras-chave (regex para separação por vírgulas)
+=======
+            // Verificação de palavras-chave
+>>>>>>> parte2/main
             const keywordsInput = document.getElementById('id_keywords');
             const keywordsRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+(\.\s*[A-Za-zÀ-ÖØ-öø-ÿ\s]+)*\.$/;
             keywordsInput.addEventListener('input', function() {
@@ -140,7 +177,11 @@
                 }
             });
 
+<<<<<<< HEAD
             // Verificação de data (entre 1900 e o ano atual)
+=======
+            // Verificação de data
+>>>>>>> parte2/main
             const dateInput = document.getElementById('id_date');
             const currentYear = new Date().getFullYear();
             dateInput.addEventListener('input', function() {

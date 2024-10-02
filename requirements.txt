@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 absl-py==2.0.0
 anyio==4.0.0
 appdirs==1.4.3
@@ -209,3 +210,12 @@ widgetsnbextension==2.0.0
 wrapt==1.15.0
 xkit==0.0.0
 zipp==1.0.0
+=======
+asgiref==3.8.1
+Django==4.2.15
+sqlparse==0.5.1
+typing-extensions==4.12.2
+djangorestframework
+djangorestframework-simplejwt
+drf-yasg
+>>>>>>> parte2/main
