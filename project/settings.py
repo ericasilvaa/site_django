@@ -7,9 +7,24 @@ MEDIA_URL = '/pdfs/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'pdfs')
 
 SECRET_KEY = 'django-insecure-!)fu#80qj4$%vv!dcoy(rdob9yo*(+k)q_67=bc+r@hg@5)o^p'
+<<<<<<< HEAD
 DEBUG = True
 ALLOWED_HOSTS = []
 
+=======
+SECRET_KEY = 'django-insecure-!)fu#80qj4$%vv!dcoy(rdob9yo*(+k)q_67=bc+r@hg@5)o^p'
+DEBUG = True
+ALLOWED_HOSTS = []
+
+
+SESSION_COOKIE_SECURE = False  # Defina como True se estiver usando HTTPS
+CSRF_COOKIE_SECURE = False  # Defina como True se estiver usando HTTPS
+
+LOGIN_URL = '/accounts/login/'  # A URL para a página de login
+LOGIN_REDIRECT_URL = '/'  # A URL para redirecionar após o login bem-sucedido
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+>>>>>>> Parte 3
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -32,15 +47,42 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
 ]
 
 
+=======
+    'app_project.middleware.AuditMiddleware',
+
+    # requerir login em todas as páginas
+    'app_project.middleware.LoginRequiredMiddleware',
+
+]
+
+
+# Configuração do sistema de mensagens
+from django.contrib.messages import constants as messages
+
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
+
+>>>>>>> Parte 3
 ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': ['templates'],
+=======
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+>>>>>>> Parte 3
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -53,6 +95,10 @@ TEMPLATES = [
     },
 ]
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Parte 3
 WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
@@ -60,12 +106,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'djangoprojeto',
         'USER': 'artigos',
+<<<<<<< HEAD
         'PASSWORD': 'django',
+=======
+        'PASSWORD': 'sistema',
+>>>>>>> Parte 3
         'HOST': 'localhost',
         'PORT': '',
     }
 }
 
+<<<<<<< HEAD
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -81,10 +132,29 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+=======
+# Validação de senha para aumentar a segurança
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', 'OPTIONS': {'min_length': 8}},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+]
+
+# Configuração de URLs de redirecionamento para login e logout
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+>>>>>>> Parte 3
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+<<<<<<< HEAD
+=======
+'myapp.middleware.LoginRequiredMiddleware',
+USE_TZ = True
+>>>>>>> Parte 3
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

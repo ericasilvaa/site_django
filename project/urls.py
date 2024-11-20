@@ -3,12 +3,19 @@ from app_project import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+<<<<<<< HEAD
 
+=======
+from django.contrib.auth import views as auth_views
+>>>>>>> Parte 3
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+<<<<<<< HEAD
 
+=======
+>>>>>>> Parte 3
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -27,6 +34,10 @@ schema_view = get_schema_view(
 # Definindo todas as rotas no mesmo urlpatterns
 urlpatterns = [
     # Rotas principais do site
+<<<<<<< HEAD
+=======
+    path('logout/', views.user_logout, name='logout'),  # Atualizado para usar a view de logout personalizada
+>>>>>>> Parte 3
     path('admin/', admin.site.urls),  # Rota para o painel administrativo do Django
     path('', views.article_list, name='article_list'),  # Página inicial com a lista de artigos
     path('article/<int:pk>/', views.article_detail, name='article_detail_site'),  # Detalhes de um artigo específico
@@ -45,4 +56,25 @@ urlpatterns = [
 
     # Documentação da API Swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+<<<<<<< HEAD
+=======
+
+
+
+
+    # Rotas  de Autenticação
+    #path('login/', views.user_login, name='login'),  # Atualizado para usar a view de login personalizada
+    path('accounts/', include('django.contrib.auth.urls')),
+      # accounts/ login/ [name='login']
+      # accounts/ logout/ [name='logout']
+      # accounts/ password_change/ [name='password_change']
+      # accounts/ password_change/done/ [name='password_change_done']
+      # accounts/ password_reset/ [name='password_reset']
+      # accounts/ password_reset/done/ [name='password_reset_done']
+      # accounts/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
+      # accounts/ reset/done/ [name='password_reset_complete']
+    path('profile/', views.profile, name='profile'),
+    path('register/', views.register, name='register'),
+
+>>>>>>> Parte 3
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Configurações para servir arquivos de mídia

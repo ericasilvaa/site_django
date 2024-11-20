@@ -18,6 +18,25 @@
                 <input class="form-control me-2" type="search" name="q" placeholder="Buscar artigos" aria-label="Search" value="{{ request.GET.q }}">
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
+<<<<<<< HEAD
+=======
+            <!-- Links de perfil e autenticação -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Perfil</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+>>>>>>> Parte 3
         </div>
     </div>
 </nav>

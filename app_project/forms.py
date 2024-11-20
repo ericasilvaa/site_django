@@ -19,5 +19,14 @@ class ArticleForm(forms.ModelForm):
             'date': 'Data',
             'journal': 'Jornal',
             'pdf_file': 'Arquivo PDF',
+<<<<<<< HEAD
  
         }
+=======
+        }
+
+# Adicione a classe LoginForm abaixo
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=150, label='Nome de Usuário')
+    password = forms.CharField(widget=forms.PasswordInput(), label='Senha')
+>>>>>>> Parte 3
